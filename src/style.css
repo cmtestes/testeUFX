@@ -19,7 +19,7 @@ main {
 	justify-content: center;
 	align-items: center;
 	z-index: -2;
-	background-image: url(img/background.jpg);
+	background-image: url('https://i.ytimg.com/vi/0C2zPSgkUls/maxresdefault.jpg');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
