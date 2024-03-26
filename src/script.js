@@ -48,20 +48,31 @@ const mapas = [
 	"Yakushima",
 ];
 
+const menu = [
+	"Jogar",
+	"Sobre",
+]
+
+let telaInicial = true;
+
 let indice     = 0;
 let indice2    = nomes.length - 1;
 let indiceMapa = 0;
+let indiceMenu = 0;
 
 const audio = new Audio();
 audio.src   = "src/som/selecao.wav";
 
 const audioF  = new Audio();
 audioF.src    = "src/som/fundo.mp3";
-audioF.volume = 0.2;
+audioF.volume = 0.0;
 audioF.loop   = true;
 
 const audioS = new Audio();
 audioS.src   = "src/som/selecionado.wav";
+
+audio1 = new Audio();
+audio2 = new Audio();
 
 let tranca  = false;
 let tranca2 = false;
@@ -112,8 +123,43 @@ function criarDivs(selecao, nomes, mapas) {
 }
 
 document.addEventListener('keydown', function(event) {
-	if (!(tranca && tranca2)) {
-		document.getElementsByClassName("telaInicial")[0].style.display = "none";
+	if (telaInicial == true) {
+		document.getElementsByClassName("TelaBotoes")[0].style.display = "none";
+		audioF.volume = 0.1;
+		switch (event.key) {
+			case "ArrowUp":
+			case "w":
+			case "W":
+				indiceMenu - 1 < 0 ? indiceMenu = menu.length - 1 : indiceMenu--;
+				for (var i = 0; i < menu.length; i++) {
+					document.getElementsByClassName(menu[i])[0].style.backgroundColor = "white";
+				}
+				document.getElementsByClassName(menu[indiceMenu])[0].style.backgroundColor = "yellow";
+				break;
+			
+			case "ArrowDown":
+			case "s":
+			case "S":
+				indiceMenu + 1 > menu.length - 1 ? indiceMenu = 0 : indiceMenu++;
+				for (var i = 0; i < menu.length; i++) {
+					document.getElementsByClassName(menu[i])[0].style.backgroundColor = "white";
+				}
+				document.getElementsByClassName(menu[indiceMenu])[0].style.backgroundColor = "yellow";
+				break;
+			
+			case "Enter":
+			case " ":
+				if (menu[indiceMenu] == "Jogar")
+					telaInicial = false;
+					document.getElementsByClassName("TelaInicial")[0].style.display = "none";
+					document.getElementsByClassName("TelaEscolha")[0].style.display = "flex";
+					audio.currentTime = 0;
+					audio.play();
+				break;
+		}
+		document.getElementsByClassName("TelaSelecao")[0].style.display = "flex";
+	}
+	else if (!(tranca && tranca2)) {
 		if (!tranca) {
 			switch (event.key) {
 				case "ArrowLeft":
@@ -166,7 +212,13 @@ document.addEventListener('keydown', function(event) {
 			document.getElementsByClassName('escolhido')[0].style.backgroundColor = tranca2 ? "#6356f735"   : "transparent";
 			document.getElementsByClassName('nomeEscolhidoContorno')[0].innerHTML = tranca2 ? "Escolhido" : nomes[indice];
 			document.getElementsByClassName('nomeEscolhido')[0].innerHTML         = tranca2 ? "" : nomes[indice];
+			audioS.currentTime = 0;
 			audioS.play();
+			if (tranca2) {
+				audio1.src = "src/som/personagens/" + nomes[indice] + ".mp3";
+				audio1.currentTime = 0;
+				audio1.play();
+			}
 		}
 
 		if (event.key == "Enter") {
@@ -174,7 +226,14 @@ document.addEventListener('keydown', function(event) {
 			document.getElementsByClassName('escolhido2')[0].style.backgroundColor = tranca ? "#c115154c"   : "transparent";
 			document.getElementsByClassName('nomeEscolhidoContorno2')[0].innerHTML = tranca ? "Escolhido" : nomes[indice2];
 			document.getElementsByClassName('nomeEscolhido2')[0].innerHTML         = tranca ? "" : nomes[indice2];
+			audioS.currentTime = 0;
 			audioS.play();
+			if (tranca) {
+				audio2.src = "src/som/personagens/" + nomes[indice2] + ".mp3";
+				audio2.currentTime = 0;
+					audio2.play();
+			}
+
 		}
 		
 		if (tranca && tranca2) {
@@ -209,6 +268,22 @@ document.addEventListener('keydown', function(event) {
 				setTimeout (() => {
 					this.documentElement.getElementsByClassName('Bm2')[0].style.backgroundColor = "white";
 				}, 600);
+				break;
+
+			case "h":
+			case "H":
+				tranca  = false;
+				tranca2 = false;
+				document.getElementsByClassName('escolhido')[0].style.backgroundColor  = "transparent";
+				document.getElementsByClassName('escolhido2')[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('nomeEscolhidoContorno')[0].innerHTML  = nomes[indice];
+				document.getElementsByClassName('nomeEscolhido')[0].innerHTML          = nomes[indice];
+				document.getElementsByClassName('nomeEscolhidoContorno2')[0].innerHTML = nomes[indice2];
+				document.getElementsByClassName('nomeEscolhido2')[0].innerHTML         = nomes[indice2];
+				document.getElementsByClassName('selecao')[0].classList.remove('descer');
+				document.getElementsByClassName('telaMapa')[0].classList.remove('descer2');
+				document.getElementsByClassName('imgEscolhido')[0].classList.remove('esquerda');
+				document.getElementsByClassName('imgEscolhido2')[0].classList.remove('direita');
 				break;
 		}
 		audioF.play();
