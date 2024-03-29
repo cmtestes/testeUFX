@@ -65,7 +65,7 @@ audio.src   = "src/som/selecao.wav";
 
 const audioF  = new Audio();
 audioF.src    = "src/som/fundo.mp3";
-audioF.volume = 0.0;
+audioF.volume = 0.5;
 audioF.loop   = true;
 
 const audioS = new Audio();
@@ -123,9 +123,9 @@ function criarDivs(selecao, nomes, mapas) {
 }
 
 document.addEventListener('keydown', function(event) {
+	audioF.play();
 	if (telaInicial == true) {
 		document.getElementsByClassName("TelaBotoes")[0].style.display = "none";
-		audioF.volume = 0.1;
 		switch (event.key) {
 			case "ArrowUp":
 			case "w":
@@ -135,6 +135,8 @@ document.addEventListener('keydown', function(event) {
 					document.getElementsByClassName(menu[i])[0].style.backgroundColor = "white";
 				}
 				document.getElementsByClassName(menu[indiceMenu])[0].style.backgroundColor = "yellow";
+				audio.currentTime = 0;
+				audio.play();
 				break;
 			
 			case "ArrowDown":
@@ -145,6 +147,8 @@ document.addEventListener('keydown', function(event) {
 					document.getElementsByClassName(menu[i])[0].style.backgroundColor = "white";
 				}
 				document.getElementsByClassName(menu[indiceMenu])[0].style.backgroundColor = "yellow";
+				audio.currentTime = 0;
+				audio.play();
 				break;
 			
 			case "Enter":
@@ -153,8 +157,8 @@ document.addEventListener('keydown', function(event) {
 					telaInicial = false;
 					document.getElementsByClassName("TelaInicial")[0].style.display = "none";
 					document.getElementsByClassName("TelaEscolha")[0].style.display = "flex";
-					audio.currentTime = 0;
-					audio.play();
+					audioS.currentTime = 0;
+					audioS.play();
 				break;
 		}
 		document.getElementsByClassName("TelaSelecao")[0].style.display = "flex";
@@ -252,9 +256,9 @@ document.addEventListener('keydown', function(event) {
 				indiceMapa - 1 < 0 ? indiceMapa = mapas.length - 1 : indiceMapa--;
 				audio.currentTime = 0;
 				audio.play();
-				this.documentElement.getElementsByClassName('Bm1')[0].style.backgroundColor = "yellow";
+				this.documentElement.getElementsByClassName('Bm1')[0].style.color = "yellow";
 				setTimeout (() => {
-					this.documentElement.getElementsByClassName('Bm1')[0].style.backgroundColor = "white";
+					this.documentElement.getElementsByClassName('Bm1')[0].style.color = "white";
 				}, 600);
 				break;
 			
@@ -264,9 +268,9 @@ document.addEventListener('keydown', function(event) {
 				indiceMapa + 1 > mapas.length - 1 ? indiceMapa = 0 : indiceMapa++;
 				audio.currentTime = 0;
 				audio.play();
-				this.documentElement.getElementsByClassName('Bm2')[0].style.backgroundColor = "yellow";
+				this.documentElement.getElementsByClassName('Bm2')[0].style.color = "yellow";
 				setTimeout (() => {
-					this.documentElement.getElementsByClassName('Bm2')[0].style.backgroundColor = "white";
+					this.documentElement.getElementsByClassName('Bm2')[0].style.color = "white";
 				}, 600);
 				break;
 

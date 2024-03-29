@@ -195,6 +195,8 @@ body {
 	z-index: 55;
 	justify-content: center;
 	align-items: center;
+	color: white;
+	font-size: 2.5rem;
 }
 
 .mapa {
@@ -208,25 +210,24 @@ body {
 
 .nomeMapa {
 	font-size: 2.5rem;
-	color: #ffffff;
-	animation: flutuar 3s infinite;
+	margin: 0 20px;
 }
+
 .mapa img {
 	height: 60%;
 	width: 40%;
 	border: #fafafa 5px solid;
 	border-radius: 15px;
 	margin-top: 30px;
-	margin-bottom: 30px;
-	animation: flutuar 3s infinite;
+	margin-bottom: 80px;
 }
 
 
 .selecaoMapa {
 	background-color: #000000;
 	position: fixed;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	border-radius: 10px;
 	border: #ffffff 2px solid;
@@ -234,15 +235,13 @@ body {
 	z-index: 57;
 } 
 
-.botoesMapa button {
-	margin: 0 20px;
-	color: rgb(0, 0, 0);
-	font-size: 2rem;
-	border-radius: 15px;
-	padding: 5px 10px;
-	animation: opacidade 3s infinite;
-	z-index: 60;
+.botoesMapa {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
+
 
 .descer {
 	transition: 3s;
@@ -306,7 +305,7 @@ body {
 
 @keyframes opacidade {
 	0% {
-		opacity: 0.4;
+		opacity: 0.1;
 	}
 	50% {
 		opacity: 0.8;
