@@ -65,7 +65,7 @@ audio.src   = "src/som/selecao.wav";
 
 const audioF  = new Audio();
 audioF.src    = "src/som/fundo.mp3";
-audioF.volume = 0.5;
+audioF.volume = 0.2;
 audioF.loop   = true;
 
 const audioS = new Audio();
@@ -158,6 +158,7 @@ document.addEventListener('keydown', function(event) {
 					document.getElementsByClassName("TelaInicial")[0].style.display = "none";
 					document.getElementsByClassName("TelaEscolha")[0].style.display = "flex";
 					audioS.currentTime = 0;
+					audioS.volume = 2.0;
 					audioS.play();
 				break;
 		}
